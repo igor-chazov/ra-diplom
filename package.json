@@ -1,10 +1,5 @@
 {
-  "name": "ra-diplom",
-  "author": {
-    "name": "Igor Chazov",
-    "email": "igor-chazov@yandex.ru",
-    "url": "https://github.com/igor-chazov"
-  },
+  "name": "ra-diplom",  
   "version": "0.1.0",
   "private": true,
   "homepage": "https://igor-chazov.github.io/ra-diplom",
