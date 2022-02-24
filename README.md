@@ -1,6 +1,6 @@
 ﻿# Дипломный проект курса «React»
 
-[[GithubPages](https://igor-chazov.github.io/ra-diplom)]
+[![Build status](https://ci.appveyor.com/api/projects/status/hsu5wks1vdxdm72g?svg=true)](https://ci.appveyor.com/project/igor-chazov/ra-diplom) [[GithubPages](https://igor-chazov.github.io/ra-diplom)]
 
 ---
 
