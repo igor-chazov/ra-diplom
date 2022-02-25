@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css'
-import { Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import IndexPage from './pages/IndexPage';
 import CatalogPage from './pages/CatalogPage';
@@ -12,17 +12,19 @@ import Page404 from './pages/Page404';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/ra-diplom" element={<Layout />} >
-        <Route index element={<IndexPage />} />
-        <Route path="catalog" element={<CatalogPage />} />
-        <Route path="about" element={<AboutPage />} />
-        <Route path="contacts" element={<ContactsPage />} />
-        <Route path="catalog/:id" element={<ProductPage />} />
-        <Route path="cart" element={<CartPage />} />
-        <Route path="*" element={<Page404 />} />
-      </Route>
-    </Routes>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<IndexPage />} />
+          <Route path="/catalog" element={<CatalogPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contacts" element={<ContactsPage />} />
+          <Route path="/catalog/:id" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
 
