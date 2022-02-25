@@ -23,6 +23,15 @@ function TopSales() {
     return null;
   }
 
+  if (error) {
+    return (
+      <section className="top-sales">
+        <h2 className="text-center">Хиты продаж!</h2>
+        <Error message='Произошла ошибка!' repeatRequestHandler={repeatRequestHandler} />
+      </section>
+    );
+  }
+
   return (
     <section className="top-sales">
       <h2 className="text-center">Хиты продаж!</h2>
@@ -36,10 +45,6 @@ function TopSales() {
             );
           })}
         </div>
-      )}
-
-      {error === null ? null : (
-        <Error message='Произошла ошибка!' repeatRequestHandler={repeatRequestHandler} />
       )}
     </section>
   );

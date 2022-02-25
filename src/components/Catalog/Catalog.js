@@ -114,6 +114,15 @@ function Catalog({ withSearch }) {
 
   const repeatRequestHandler = (evt) => {
     evt.preventDefault();
+    const params = Object.fromEntries([...searchParams])
+    const categoryId = params.categoryId === undefined ? 0 : Number(params.categoryId);
+    const searchString = params.search === undefined ? '' : params.search;
+
+    dispatch(getCategoriesRequest()).then(({ type }) => {
+      if (type === 'categories/getAll/fulfilled') {
+        dispatch(getProductsRequest({ categoryId, offset: 0, searchString }));
+      }
+    });
 
     dispatch(getProductsRequest({ categoryId: selectedCategoryId, offset: offset === 0 ? offset : offset + 6, searchString }));
   }
