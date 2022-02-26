@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/ra-diplom/static/css/main.1438e365.css",
+    "main.js": "/ra-diplom/static/js/main.b7aba06e.js",
+    "static/media/banner.jpg": "/ra-diplom/static/media/banner.5fd2c60d58a8686daee0.jpg",
+    "static/media/footer-sprite.png": "/ra-diplom/static/media/footer-sprite.b3d5697aeb76ce9f8002.png",
+    "static/media/no-image.svg": "/ra-diplom/static/media/no-image.61b7c42fcab2caeb202834b8bc5695fe.svg",
+    "index.html": "/ra-diplom/index.html",
+    "main.1438e365.css.map": "/ra-diplom/static/css/main.1438e365.css.map",
+    "main.b7aba06e.js.map": "/ra-diplom/static/js/main.b7aba06e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1438e365.css",
+    "static/js/main.b7aba06e.js"
+  ]
+}
