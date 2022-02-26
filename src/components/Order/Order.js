@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import getCookie from '../../utils/getCookie';
 import OrderForm from './OrderForm';
+import Error from "../Error";
 import {
   clearCartItems,
   createOrderRequest,
@@ -19,7 +20,7 @@ const initialStateOrderFrom = {
 function Order() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { items, loading } = useSelector((store) => store.cartSlice);
+  const { items, loading, error } = useSelector((store) => store.cartSlice);
   const [orderForm, setOrderForm] = useState(initialStateOrderFrom);
   let timeout;
 
@@ -48,6 +49,12 @@ function Order() {
     createOrder();
   }
 
+  const repeatRequestHandler = (evt) => {
+    evt.preventDefault();
+
+    createOrder();
+  }
+
   const createOrder = () => {
     if (orderForm.agreement) {
       const order = {
@@ -64,16 +71,18 @@ function Order() {
         })
       }
 
-      dispatch(createOrderRequest(order)).then(() => {
-        dispatch(setOnSuccess(true));
-        dispatch(clearCartItems());
-        dispatch(setCustomerInfo({ name: 'phone', value: order.owner.phone }));
-        dispatch(setCustomerInfo({ name: 'address', value: order.owner.address }));
+      dispatch(createOrderRequest(order)).then((error) => {
+        if (error.meta.requestStatus === 'fulfilled') {
+          dispatch(setOnSuccess(true));
+          dispatch(clearCartItems());
+          dispatch(setCustomerInfo({ name: 'phone', value: order.owner.phone }));
+          dispatch(setCustomerInfo({ name: 'address', value: order.owner.address }));
 
-        timeout = setTimeout(() => {
-          dispatch(setOnSuccess(false));
-          navigate("/");
-        }, 1000 * 10);
+          timeout = setTimeout(() => {
+            dispatch(setOnSuccess(false));
+            navigate("/");
+          }, 1000 * 10);
+        }
       });
     }
   }
@@ -83,17 +92,22 @@ function Order() {
   }
 
   return (
-    <section className="order">
-      <h2 className="text-center">Оформить заказ</h2>
-      <div className="card" style={{ maxWidth: '30rem', margin: '0 auto' }}>
-        <OrderForm
-          {...orderForm}
-          loading={loading}
-          onChangeFormFieldHandler={onChangeFormFieldHandler}
-          onSubmitHandler={onSubmitHandler}
-        />
-      </div>
-    </section>
+    <>
+      {error !== null
+        ? <Error message='Произошла ошибка!' repeatRequestHandler={repeatRequestHandler} />
+        : <section className="order">
+          <h2 className="text-center">Оформить заказ</h2>
+          <div className="card" style={{ maxWidth: '30rem', margin: '0 auto' }}>
+            <OrderForm
+              {...orderForm}
+              loading={loading}
+              onChangeFormFieldHandler={onChangeFormFieldHandler}
+              onSubmitHandler={onSubmitHandler}
+            />
+          </div>
+        </section>
+      }
+    </>
   );
 }
 

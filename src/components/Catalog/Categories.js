@@ -25,7 +25,7 @@ function Categories({ categories, selectedId, onClickCategoryHandler }) {
             <Link
               className={`nav-link ${selectedId === category.id ? 'active' : null}`}
               to={`catalog?categoryId=${selectedId}`}
-              onClick={(e) => onClickCategoryHandler(e, category.id)}
+              onClick={(evt) => onClickCategoryHandler(evt, category.id)}
             >
               {category.title}
             </Link>
